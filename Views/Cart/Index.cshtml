@@ -1,0 +1,150 @@
+﻿@model CartModel
+<html>
+<head>
+
+    <style>
+        .button {
+            display: inline - block;
+            padding: 10px 15px;
+            font - size: 24px;
+            cursor: pointer;
+            text - align: center;
+            text - decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: purple;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+            .button:hover {
+                background-color: #58257b
+            }
+
+            .button:active {
+                background-color: #58257b;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+    table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+       
+
+        tfoot td {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+         
+
+        .img__cart{
+            width: 100px;
+            border-radius: .5rem;
+        }
+    </style>
+</head>
+<body>
+    <section class="featured section" id="featured">
+        <h2 class="section__title"> Shopping Cart</h2>
+        <div class="featured__container container">
+            
+       
+               
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Subtotal</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                  
+                        @foreach (var item in Model.getAllItems())
+                    {
+
+                        <tr>
+                            <td>@item.Name</td>
+                            <td> <img src="~/assets/img/Products/@item.ImagePath" alt="" class="img__cart"></td>
+                            <td>@item.Price</td>
+                           
+                                   <td class="product-quantity">
+                                            @using(Html.BeginForm("UpdateQuantity","cart", FormMethod.Post))
+                                            {
+                                                <div class="quantity buttons_added">
+                                                    @Html.HiddenFor(m => @item.Id)
+                                                    <input type="submit" class="minus" value="-" name="btnUpdateQuantity">
+                                                   
+                                                    @Html.TextBoxFor(m => item.Quantity, "", new {@class = "input-text qty tex", @type="number"})
+                                                    <input type="submit" class="plus" value="+" name="btnUpdateQuantity">
+
+                                                </div>
+                                            }
+                                           
+                                        </td>
+                            
+                            <td>@item.lineTotal</td>
+                            <td>
+                                <form method="post" action="@Url.Action("RemoveFromCart", "Cart")">
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                     <button class="ri-delete-bin-line"></button>
+                                </form>
+                               
+                            </td>
+                        </tr>
+                      
+                        }
+                   
+                    </tbody>
+                @if (ViewBag.Message != null)
+                {
+                    <p>@ViewBag.Message</p>
+                }
+                <tfoot>
+                    <tr>
+                        <td colspan="3">Total</td>
+                        <td>@Model.getTotal()</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+
+                </table>
+            <div class="actions">
+                <a href="@Url.Action("Shop","home")">
+                    <button class="button" >Continue Shopping</button>
+                </a>
+                <a href="@Url.Action("checkout","cart")">
+                    <button class="button">Checkout</button>
+                </a>
+            </div>
+
+
+            </div>
+            
+       
+
+    </section>
+    
+</body>
+</html>

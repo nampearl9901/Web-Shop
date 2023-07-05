@@ -1,0 +1,213 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ShopCarrs.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon" class="favicon">
+
+    <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!--=============== SWIPER CSS ===============-->
+    <link rel="stylesheet" href="~/assets/css/swiper-bundle.min.css">
+
+    <!--=============== CSS ===============-->
+    <link rel="stylesheet" href="~/assets/css/styles.css">
+    <link rel="stylesheet" href="~/assets/css/myCustom.css">
+
+ 
+
+    <title>Super car website - AbdullahMoin</title>
+    <style>
+        .nav-link.btn {
+           
+            font-size: 1.2rem; /* Thay đổi kích thước phông chữ */
+   
+            background: transparent;
+            color: #fff; /* Màu chữ trên nền */
+            border: none; /* Bỏ viền của nút */
+        }
+
+            .nav-link.btn:hover {
+                background-color: rgba(0, 128, 255, 0.5); /* Màu nền trong suốt của nút khi rê chuột qua */
+                color: #fff; /* Màu chữ trên nền khi rê chuột qua */
+            }
+    </style>
+</head>
+
+<body>
+    <!--==================== HEADER ====================-->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a  class="nav__logo" asp-controller="home" asp-action="Index">
+                <i class="ri-steering-fill"></i>
+                NextCar
+            </a>
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item">
+                        <a asp-controller="home" asp-action="Index" class="nav__link active-link">Home</a>
+                    </li>
+                    <li class="nav__item">
+                        <a  href="#about" class="nav__link ">About</a>
+                    </li>
+                
+                    <li class="nav__item">
+                        <a asp-controller="home" asp-action="Shop" class="nav__link">Cars</a>
+                    </li>
+
+                    <li class="nav__item">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                        <li><a class="nav__link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a></li>
+                        <li>
+                            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                                <button type="submit" class="nav-link btn btn-link text-dark"> <i class="ri-user-shared-2-fill"></i></button>
+                            </form>
+                        </li>
+                        }
+                        else
+                        {
+                        <li><a class="nav__link" href="/Identity/Account/Login?ReturnUrl=/"> Login</a></li>
+                        <li><a class="nav__link" href="/Identity/Account/Register"> Register</a></li>
+                        }
+                      
+                    </li>
+                </ul>
+
+                <div class="nav__close" id="nav-close">
+                    <i class="ri-close-line"></i>
+                </div>
+            </div>
+
+            <!-- Togglar Button -->
+            <div class="nav__toggle" id="nav-toggle">
+                <i class="ri-menu-line"></i>
+            </div>
+
+        </nav>
+    </header>
+
+    <!--************* MAIN CODE ****************-->
+    @RenderBody()
+
+    <!--==================== FOOTER ====================-->
+    <footer class="footer section">
+        <div class="shapeX shape__big"></div>
+        <div class="shapeX shape__small"></div>
+
+        <div class="footer__container container grid">
+            <div class="footer__content">
+                <a href="#" class="footer__logo">
+                    <i class="ri-steering-line"></i>
+                    NextCar
+                </a>
+                <p class="footer__description">
+                    We offer the best cars of <br>
+                    the most recognized brands in <br>
+                    the world.
+                </p>
+            </div>
+
+
+            <div class="footer__content">
+
+                <h3 class="footer__title">Company </h3>
+
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__links">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">Cars</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">History</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">Shop</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links"></a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title">Information </h3>
+                <ul class="footer__links">
+                    <li>
+                        <a href="#" class="footer__links">Request a quote</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">Find a dealer</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">Contact us</a>
+                    </li>
+                    <li>
+                        <a href="#" class="footer__links">Services</a>
+                    </li>
+
+                </ul>
+            </div>
+
+            <div class="footer__content">
+                <h3 class="footer__title"> Follow us </h3>
+
+                <ul class="footer__social">
+                    <a href="" target="_blank" class="footer__social-link">
+                        <i class="ri-facebook-fill"></i>
+                    </a>
+                    <a href="" target="_blank" class="footer__social-link">
+                        <i class="ri-instagram-line"></i>
+                    </a>
+                    <a href="" target="_blank" class="footer__social-link">
+                        <i class="ri-twitter-line"></i>
+                    </a>
+                </ul>
+            </div>
+        </div>
+        <span class="footer__copy">
+            &#169; <a target="_blank" href="abdullahmoin.web.app" class="footer__dev-link">abdullah-moin.</a> All rigths
+            reserved
+            <p id="date"></p>
+        </span>
+    </footer>
+
+
+    <!--========== SCROLL UP ==========-->
+
+    <a href="" class="scrollup" id="scroll-up">
+        <i class="ri-arrow-up-s-line"></i>
+    </a>
+
+
+    <!--=============== SCROLL REVEAL - PAGE ANNIMATION ===============-->
+    <script src="~/assets/js/scrollrevealAnimation.min.js"></script>
+
+    <!--=============== SWIPER JS - PRODUCT SLIDER ===============-->
+    <script src="/assets/js/swiper-bundle.min.js"></script>
+
+    <!--=============== MIXITUP JS - FILTER PRODUCT ===============-->
+    <script src="~/assets/js/mixitup.min.js"></script>
+
+    <!--=============== MAIN JS ===============-->
+    <script src="~/assets/js/main.js"></script>
+
+
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,129 @@
+﻿@model List<ShopCarrs.Models.Order>
+<head>
+
+    <style>
+        .button {
+            display: inline - block;
+            padding: 10px 15px;
+            font - size: 24px;
+            cursor: pointer;
+            text - align: center;
+            text - decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: purple;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+            .button:hover {
+                background-color: #58257b
+            }
+
+            .button:active {
+                background-color: #58257b;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+
+
+
+        tfoot td {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+
+
+       
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h5 class="card-title fw-semibold mb-4">Order</h5>
+                        </div>
+                        
+                        <section class="featured section" id="featured">
+
+                            <div class="featured__container container">
+
+
+
+
+                                <table>
+                                    <thead>
+                                        <tr>
+
+                                            <th>OrderDate</th>
+                                            <th>Status</th>
+                                            <th> TotalAmount</th>
+                                           
+                                         
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                                            @foreach (var item in Model)
+                                                            {
+
+                                                                <tr>
+
+                                                                    <td> @item.OrderDate</td>
+                                                                    <td>@item.Status</td>
+
+                                                                    <td>
+                                                                        @item.TotalAmount
+
+                                                                    </td>
+
+                                                                 
+
+                                                                </tr>
+
+                                                            }
+
+                                    </tbody>
+
+
+                                </table>
+
+
+
+                            </div>
+
+
+
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+         </div>
+     </div>
+    
+
+</body>
+</html>

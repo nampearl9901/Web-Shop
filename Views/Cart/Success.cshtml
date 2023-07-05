@@ -1,0 +1,116 @@
+﻿@model OrderSuccess
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+   <style>
+        .button {
+            display: inline - block;
+            padding: 10px 15px;
+            font - size: 24px;
+            cursor: pointer;
+            text - align: center;
+            text - decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: purple;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+            .button:hover {
+                background-color: #58257b
+            }
+
+            .button:active {
+                background-color: #58257b;
+                box-shadow: 0 5px #666;
+                transform: translateY(4px);
+            }
+        .invoice {
+            background-color: #fff;
+            padding: 20px;
+            margin: 0 auto;
+            max-width: 800px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+            .invoice h1 {
+                font-size: 24px;
+                margin-top: 0;
+                color: black;
+            }
+
+        .invoice-details {
+            color: black;
+            margin-bottom: 20px;
+        }
+
+            .invoice-details p {
+                margin: 0;
+            }
+
+        .invoice-items {
+            margin-bottom: 20px;
+        }
+
+            .invoice-items h2 {
+                margin-top: 0;
+            }
+
+            .invoice-items table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .invoice-items th, .invoice-items td {
+                padding: 10px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .invoice-items th {
+                background-color: #f5f5f5;
+                color: black;
+            }
+
+        .invoice-total {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+            color:black;
+        }
+   </style>
+</head>
+<body>
+    <section class="featured section" id="featured">
+       
+        <div class="featured__container container">
+            <div class="invoice">
+                <h1>Order Information</h1>
+                <div class="invoice-details">
+                     <p><strong>Name:</strong> @Model.FullName</p>
+                    <p><strong>Email:</strong> @Model.Email</p>
+                    <p><strong>Address:</strong> @Model.Address</p>
+                    <p><strong>Phone:</strong> @Model.Phone</p>
+                    <p><strong>Gender:</strong>@Model.Gender</p>
+                
+                </div>
+                <div class="invoice-items">
+                <p><strong>Total:</strong> @Model.OrderDate</p>
+                </div>
+                <div class="invoice-total">
+                <p><strong>Total:</strong> @Model.Total</p>
+                </div>
+            </div>
+            </div>
+        <a href="@Url.Action("Shop","home")">
+            <button class="button">Continue Shopping</button>
+        </a>
+    </section>
+  
+</body>
+</html>
+
+         

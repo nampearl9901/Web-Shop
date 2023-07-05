@@ -1,0 +1,55 @@
+﻿@model List<ShopCarrs.Models.Product>
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h5 class="card-title fw-semibold mb-4">Card</h5>
+                    </div>
+                    <div class="col-md-2">
+                        <a asp-action="CreateProduct" class="btn btn-outline-success m-1"> <i class="ti ti-plus"></i>Create</a>
+                    </div>
+
+                </div>
+
+                
+                <div class="row">
+                    @foreach (var item in Model)
+                        {
+                        <div class="col-md-4">
+                       
+                            <div class="card">
+                                <img src="~/assets/img/Products/@item.Image" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.ProductName</h5>
+                                    <p class="card-text">
+                                        @item.Price
+                                    </p>
+                                    <p class="card-text">
+                                        @item.Description
+                                    </p>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a asp-action="EditProduct" asp-route-id="@item.ProductId" class="btn btn-danger m-1">Edit</a>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a asp-action="DeleteProduct" asp-route-id="@item.ProductId" class="btn btn-warning m-1">Delete</a>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                           
+                        </div>
+                        }
+                    
+                  
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

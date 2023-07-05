@@ -1,0 +1,68 @@
+﻿@using ShopCarrs.Repository;
+
+<!-- about section start -->
+@model List<ShopCarrs.Models.Product>
+@inject ICategoryRepository categoryRepository;
+@inject IBrandRepository brandRepository;
+
+<!--==================== FEATURED ====================-->
+<section class="featured section" id="featured">
+    <h2 class="section__title">Featured Luxury Cars</h2>
+    <div class="featured__container container">
+        <ul class="featured__filters">
+            <li>
+                <button class="featured__item active-featured" data-filter="all">
+                    <span>All</span>
+                </button>
+            </li>
+
+            <li>
+                <select class="featured__item1" onchange="window.location.href=this.value;">
+               
+                    @foreach (var item in brandRepository.GetAll())
+                    {
+                        <option value="@Url.Action("FindCarByBrand", "Home", new { id = item.BrandId })">@item.BrandName</option>
+                    }
+                </select>
+            </li>
+            <li>
+              
+                <select class="featured__item1" onchange="window.location.href=this.value;">
+                   
+                    @foreach (var item in categoryRepository.GetAll())
+                    {
+                        <option value="@Url.Action("FindCarByCategoryId", "Home", new { id = item.CategoryId })">@item.CategoryName</option>
+
+                    }
+                </select>
+            </li>
+        </ul>
+
+        <div class="featured__content grid">
+
+
+            @foreach (var item in Model)
+            {
+                <article class="featured__card mix tesla">
+                    <div class="shape shape__smaller"></div>
+
+                    <h1 class="featured__title">@item.ProductName</h1>
+                    <h3 class="featured__subtitle">Model X</h3>
+                    <a asp-controller="home" asp-action="Detail" asp-route-id="@item.ProductId">
+                        <img src="~/assets/img/Products/@item.Image" alt="" class="featured__img" />
+                    </a>
+
+                    <h3 class="featured__price">@item.Price</h3>
+                    <button class="button featured__button" style="background-color:palevioletred">
+                        <i class="ri-shopping-bag-2-line"></i>
+                    </button>
+
+                </article>
+
+            }
+            
+
+        </div>
+    </div>
+
+</section>
